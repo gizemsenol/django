@@ -1,0 +1,24 @@
+
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+
+    <div class="container">
+    <div style="background-color:rgb(178, 185, 190)" class="jumbotron">
+    <h1 >Sisteme Giriş</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="text-align:right">
+    <form method="POST">{% csrf_token %}
+        {{form.as_p}}
+        <button>Giriş</button>
+    </form>
+    
+</div>
+</div>
+</div>
+{%endblock%}

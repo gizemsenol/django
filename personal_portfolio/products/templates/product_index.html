@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<h1 >Products</h1>
+<div id="myBtnContainer">
+        <button style="background-color:rosybrown" class="btn active" onclick="filterSelection('Hepsi')"> Hepsi</button>
+        <button style="background-color:rosybrown" class="btn" onclick="filterSelection('Romance')"> Romance</button>
+        <button style="background-color:rosybrown" class="btn" onclick="filterSelection('Short Stories')"> Short Stories</button>
+        <button style="background-color:rosybrown" class="btn" onclick="filterSelection('Literature')"> Literature</button>
+</div>
+<script>
+  function fillAll() {
+    $(".product_item").each(function(index, item) {$(item).show();});
+
+  }
+function filterSelection(c) {
+  if(c == "Hepsi") {
+    fillAll();
+    } else {
+      fillAll();
+    $(".product_item").each(function(index, item) {
+        if($(item).attr("data-tur") != c) {
+          $(item).hide();
+        }
+    })}
+}
+</script>
+
+<br>
+<br>
+<div class="row">
+    <div class= "column Romance"></div>
+{% for product in products %}
+    <div class="col-md-4 product_item" data-tur="{{ product.tur }}">
+        <div class="card mb-2">
+            <img class="card-img-top" src="{{ product.image }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.isim }}</h5>
+                <p class="card-text">{{ product.genel }}</p>
+                <a style="background-color:navajowhite" href="{% url 'product_detail' product.id %}"
+                    class="btn btn-primary">
+                    <font style="color:black">İncele</font>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+
+<button><a  style="float:right;margin-top: 10px;margin-right: 0ch" class="nav-link" href="{% url 'comment_view' %}">Yorumlarım</a></button>
+<button><a  style="float:right;margin-top: 10px;margin-right: 0ch" class="nav-link" href="{% url 'order_view' %}">Siparişlerim</a></button>
+
+
+<div class="row user">
+  <div class="col-md-9">
+    <div class="tab-content">
+      <div class="tab-pane active" id="user-timeline">
+        <div class="timeline-post">
+            <div class="post-media">
+              <div class="content">
+                <br><br>
+                <h3><a href="#">{{user.get_username}}</a></h3>
+              </div>
+            </div>
+          <div class="post-content">
+
+              {%if comments.length != 0%}<h5>Yorumlarınız :</h5><br>{%endif%}
+        
+              {% for comment in comments %}
+              {% if  forloop.counter != 5 %}
+              <div class="card {% if forloop.last %}mb-4{% else %}mb-2{% endif %} {% if forloop.first %}border-dark{% endif %}">
+                
+                  <div class="card-header text-white bg-dark py-2 px-3">Başlık : {{comment.baslik}}</div>
+                
+                <div class="card-body p-3">
+                  <div class="row">
+                    <div class="col-10">
+                      <div class="row mb-3">
+                        <div class="col-6">
+                          <strong class="text-muted">isim : {{ comment.isim }}</strong>
+                        </div>
+                      </div>
+                      Yorum : {{ comment.yorum }} <br>
+                      <a href="{% url 'product_detail' comment.product_id %}"
+                        class="btn btn-primary">
+                        İlgili kitap
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {%endif%}
+            {% endfor %}
+        </div>
+          <ul class="post-utility">
+            <li class="comments"><i class="fa fa-fw fa-lg fa-comment-o"></i>Toplam yorum sayısı : {{comments.length}}</li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="user-settings">
+        <div class="tile user-settings">
+          <h4 class="line-head">Edit Profile</h4>
+          <form method="post" class="form-horizontal form-material" enctype="multipart/form-data"> {% csrf_token %}
+
+            </div>
+            <br>
+            <div class="row mb-10">
+              <div class="col-md-12">
+                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

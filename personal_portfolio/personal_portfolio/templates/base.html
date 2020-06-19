@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+<nav   class="navbar navbar-expand-lg navbar-light darkcyan">
+    
+
+    <div  class="container">
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <button><a style="background-color:aliceblue" class="nav-link" href="{% url 'home_page' %}">Ana Sayfa</a></button>
+                </li>
+            <li class="nav-item active">
+                <button><a style="background-color:aliceblue" class="nav-link" href="{% url 'product_index' %}">Ürünler</a></button>
+            </li>
+          </ul>
+        </div>
+
+        <font face="Comic Sans MS Bold"><h2><b><i>Gizem'in Kitap Sitesi</b></i></h2></font>
+        
+        {% if user.is_authenticated%}
+        <div class="collapse navbar-collapse" style="float:right;margin-top: 10px;margin-right: 0ch"></div>
+          <button><a style="background-color:aliceblue" class="nav-link" href="{% url 'dashboard'%}">Sayfam</a></button>
+          <br>
+          <button><a style="background-color:aliceblue" class="nav-link" href="{% url 'logout' %}">Çıkış</a></button>
+        {%else%}
+        <div class="collapse navbar-collapse" style="float:right;margin-top: 10px;margin-right: 0ch"></div>
+          <a class="nav-link" href="{% url 'login_url' %}">Giriş</a>
+          <a class="nav-link" href="{% url 'register_url' %}">Kayıt Ol</a>    
+        {% endif %}
+
+    </div>
+
+</nav>
+
+<body style="background-color:rgb(231, 229, 229)" >
+
+<div  class="container">
+    {% block page_content %}{% endblock %}
+</div>
+<div class="container">
+  {% block register %} {%endblock%}  
+</div>
+<div class="container">
+    {% block content %} {%endblock%}  
+</div>
+<div class="container">
+    {% block body_block %} {%endblock%}  
+</div>
+<div class="container">
+    <div class="content"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>

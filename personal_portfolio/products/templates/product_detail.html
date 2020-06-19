@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+<h1>{{ product.isim }}</h1>
+<div class="row">
+    <div class="col-md-8">
+        <img src="{{ product.image }}" alt="" width="100%">
+    </div>
+    <div class="col-md-4">
+        <br>
+        <br>
+        <br>
+        <h5>Urun hakkında:</h5>
+        <p>{{ product.genel }}</p>
+        <br>
+        <h5>Yayın evi:</h5>
+        <p>{{ product.marka }}</p>
+        <br>
+        <br>
+        <h5>Fiyat:</h5>
+        <p>{{ product.fiyat }}</p>
+        <br>
+        <button><a href="{% url 'product_payment' product.id%}">Satın Al </a></button>
+
+        <br><br><br><br>
+        
+        {%if comments %}<h5>Yorumlar:</h5><br>{%endif%}
+        
+        {% for comment in comments %}
+        <div class="card {% if forloop.last %}mb-4{% else %}mb-2{% endif %} {% if forloop.first %}border-dark{% endif %}">
+          
+            <div class="card-header text-white bg-dark py-2 px-3">Başlık : {{comment.baslik}}</div>
+          
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-10">
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <strong class="text-muted">isim : {{ comment.isim }}</strong>
+                  </div>
+                </div>
+                Yorum : {{ comment.yorum }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+
+
+
+        <h5>Yorum Ekle:</h5><br>
+        <form method="post" action="{% url 'product_detail' product.id %}">
+                {% csrf_token %}
+      <label for="isim">isim:</label>
+                <input type="text" maxlength="50" name="isim"><br><br>
+      <label for="baslik">Başlık:</label>
+                <input type="text" maxlength="70" name="baslik"><br><br>
+      <label for="puan">Puan:</label>
+                <input type="range" min="1" max="5" name="puan"><br><br>
+      <label for="Yorum">Yorum:</label>
+                <input type="text" maxlength="300" name="yorum"><br><br>
+                <input type="submit" name="" value="Ekle"><br>
+      </form>
+        
+</div>
+{% endblock %}
+<script>
+function createOrder(){
+  
+
+} 
+</script>
